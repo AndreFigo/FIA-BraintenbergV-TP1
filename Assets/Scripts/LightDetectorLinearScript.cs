@@ -13,7 +13,7 @@ using System;
 public class LightDetectorLinearScript : LightDetectorScript
 {
 
-    public override float GetOutput()
+    protected override float FuncOutput(float output)
     {
         return output;
     }

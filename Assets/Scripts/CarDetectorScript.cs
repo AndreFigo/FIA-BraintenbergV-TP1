@@ -15,6 +15,9 @@ public class CarDetectorScript : MonoBehaviour
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
 
+    protected virtual float FuncOutput(float output) {
+        throw new NotImplementedException("Not implemented");
+    }
     public float output;
     public int numObjects;
 
@@ -66,8 +69,32 @@ public class CarDetectorScript : MonoBehaviour
         }
         return closestCar;
     }
+        
+    public float GetOutput() { 
+        float minVal=0, maxVal=float.MaxValue;
+        //y axis
+        if(ApplyLimits) {
+            minVal = MinY;
+            maxVal = MaxY;
+        }
+        //X axis
+        if (ApplyThresholds && output < MinX || output > MaxX) {
+            return 0;
+        }
+        float f_out = FuncOutput(output);
+        if(f_out < minVal) return minVal;
+        if(f_out > maxVal) return maxVal;
 
-    public virtual float GetOutput() { throw new NotImplementedException(); }
+        return f_out;            
+    }
+
+
+
+    // Returns all "CarToFollow" tagged objects. The sensor angle is not taken into account.
+    GameObject[] GetAllCars()
+
+    // Returns all "CarToFollow" tagged objects. The sensor angle is not taken into account.
+    GameObject[] GetAllCars()
 
     // Returns all "CarToFollow" tagged objects. The sensor angle is not taken into account.
     GameObject[] GetAllCars()

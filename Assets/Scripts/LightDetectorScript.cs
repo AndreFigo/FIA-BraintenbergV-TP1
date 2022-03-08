@@ -17,7 +17,13 @@ public class LightDetectorScript : MonoBehaviour
     public bool ApplyThresholds, ApplyLimits;
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
-
+    protected virtual float FuncOutput(float output)
+    {
+        throw new NotImplementedException("Not implemented");
+    }
+    {
+        throw new NotImplementedException("Not implemented");
+    }
     public float output;
     public int numObjects;
 
@@ -58,7 +64,23 @@ public class LightDetectorScript : MonoBehaviour
 
     }
 
-    public virtual float GetOutput() { throw new NotImplementedException(); }
+    public float GetOutput() { 
+        float minVal=0, maxVal=float.MaxValue;
+        //y axis
+        if(ApplyLimits) {
+            minVal = MinY;
+            maxVal = MaxY;
+        }
+        //X axis
+        if (ApplyThresholds && output < MinX || output > MaxX) {
+            return 0f;
+        }
+        float f_out = FuncOutput(output);
+        if(f_out < minVal) return minVal;
+        if(f_out > maxVal) return maxVal;
+
+        return f_out;            
+    }
 
     // Returns all "Light" tagged objects. The sensor angle is not taken into account.
     GameObject[] GetAllLights()

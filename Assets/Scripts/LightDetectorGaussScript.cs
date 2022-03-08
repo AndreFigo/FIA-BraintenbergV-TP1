@@ -19,11 +19,10 @@ public class LightDetectorGaussScript : LightDetectorScript
     public float min_y;
     public bool inverse = false;
     // Get gaussian output value
-    public override float GetOutput()
+    protected override float FuncOutput(float output)
     {
         // YOUR CODE HERE
-
-        return 0.0f;
+        return output;
     }
 
 

@@ -13,15 +13,9 @@ using System;
 
 public class CarDetectorLinearScript : CarDetectorScript
 {
-
-    public override float GetOutput()
+    protected override float FuncOutput(float output)
     {
         return output;
     }
-
     // YOUR CODE HERE
-
-
-
-
 }
