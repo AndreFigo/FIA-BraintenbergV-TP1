@@ -22,7 +22,7 @@ public class LightDetectorGaussScript : LightDetectorScript
     protected override float FuncOutput(float output)
     {
         // YOUR CODE HERE
-        return output;
+        return (float)(1.0f/(Math.Sqrt(2*Math.PI)*stdDev)*Math.Exp(-0.5f*Math.Pow((output-mean)/stdDev,2)));
     }
 
 

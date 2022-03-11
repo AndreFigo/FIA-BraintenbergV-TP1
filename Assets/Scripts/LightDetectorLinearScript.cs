@@ -18,6 +18,8 @@ public class LightDetectorLinearScript : LightDetectorScript
         return output;
     }
 
+    
+
     // YOUR CODE HERE
 
 

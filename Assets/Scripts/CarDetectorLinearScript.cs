@@ -17,5 +17,7 @@ public class CarDetectorLinearScript : CarDetectorScript
     {
         return output;
     }
+
+    
     // YOUR CODE HERE
 }

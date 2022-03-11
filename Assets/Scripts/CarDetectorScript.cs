@@ -78,8 +78,8 @@ public class CarDetectorScript : MonoBehaviour
             maxVal = MaxY;
         }
         //X axis
-        if (ApplyThresholds && output < MinX || output > MaxX) {
-            return 0;
+        if (ApplyThresholds && (output < MinX || output > MaxX)) {
+            return 0f;
         }
         float f_out = FuncOutput(output);
         if(f_out < minVal) return minVal;
@@ -87,14 +87,6 @@ public class CarDetectorScript : MonoBehaviour
 
         return f_out;            
     }
-
-
-
-    // Returns all "CarToFollow" tagged objects. The sensor angle is not taken into account.
-    GameObject[] GetAllCars()
-
-    // Returns all "CarToFollow" tagged objects. The sensor angle is not taken into account.
-    GameObject[] GetAllCars()
 
     // Returns all "CarToFollow" tagged objects. The sensor angle is not taken into account.
     GameObject[] GetAllCars()

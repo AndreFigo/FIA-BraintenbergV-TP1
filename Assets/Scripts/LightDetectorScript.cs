@@ -17,12 +17,11 @@ public class LightDetectorScript : MonoBehaviour
     public bool ApplyThresholds, ApplyLimits;
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
+    
     protected virtual float FuncOutput(float output)
     {
-        throw new NotImplementedException("Not implemented");
-    }
-    {
-        throw new NotImplementedException("Not implemented");
+        // throw new NotImplementedException("Not implemented");
+        return output;
     }
     public float output;
     public int numObjects;
@@ -58,13 +57,14 @@ public class LightDetectorScript : MonoBehaviour
         {
             //print (1 / (transform.position - light.transform.position).sqrMagnitude);
             float r = light.GetComponent<Light>().range;
-            output += 1.0f / ((transform.position - light.transform.position).sqrMagnitude / r + 1);
+            output +=   (1.0f / ((transform.position - light.transform.position).sqrMagnitude / r + 1));
             //Debug.DrawLine (transform.position, light.transform.position, Color.red);
         }
+        output/=numObjects;
 
     }
-
-    public float GetOutput() { 
+    //public virtual float GetOutput() { throw new NotImplementedException("Not implemented"); }
+    public virtual float GetOutput() { 
         float minVal=0, maxVal=float.MaxValue;
         //y axis
         if(ApplyLimits) {
@@ -72,12 +72,14 @@ public class LightDetectorScript : MonoBehaviour
             maxVal = MaxY;
         }
         //X axis
-        if (ApplyThresholds && output < MinX || output > MaxX) {
+        if (ApplyThresholds && (output < MinX || output > MaxX)) {
             return 0f;
+        
         }
         float f_out = FuncOutput(output);
-        if(f_out < minVal) return minVal;
-        if(f_out > maxVal) return maxVal;
+        // Console.WriteLine(f_out);
+        if(f_out < minVal && ApplyLimits) return minVal;
+        if(f_out > maxVal && ApplyLimits) return maxVal;
 
         return f_out;            
     }
