@@ -64,6 +64,11 @@
     <Compile Include="Assets\Scripts\CarDetectorLinearScript.cs" />
     <Compile Include="Assets\Scripts\CarBehaviour2a.cs" />
     <Compile Include="Assets\Scripts\CarBehaviour.cs" />
+    <Compile Include="Assets\Scripts\BumperBehaviour.cs" />
+    <Compile Include="Assets\Scripts\BumperLightDetectorScript.cs" />
+    <Compile Include="Assets\Scripts\BumperLightDetectorLinearScript.cs" />
+    <Compile Include="Assets\Scripts\BumperLightDetectorGaussScript.cs" />
+    <Compile Include="Assets\Scripts\DetectorScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

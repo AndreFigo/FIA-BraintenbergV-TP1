@@ -17,19 +17,22 @@ public class CarBehaviour2a : CarBehaviour
     {
         // YOUR CODE HERE
         float leftSensor = 0, rightSensor = 0;
-
+        bool [] areActive = { DetectLights, DetectCars, DetectBumperLights };
+        DetectorScript[] sensorRight = { RightLD, RightCD, RightBLD};
+        DetectorScript[] sensorLeft = { LeftLD, LeftCD, LeftBLD };
         //Read sensor values
-        if (DetectLights)
+        int noActiveSensors=0;
+        for(int i =0; i<areActive.Length; i++)
         {
-            leftSensor = LeftLD.GetOutput();
-            rightSensor = RightLD.GetOutput();
+            if(areActive[i])
+            {
+                noActiveSensors++;
+                leftSensor += sensorLeft[i].GetOutput();
+                rightSensor += sensorRight[i].GetOutput();
+            }
         }
-
-        if (DetectCars)
-        {
-            leftSensor = LeftCD.GetOutput();
-            rightSensor = RightCD.GetOutput();
-        }
+        leftSensor /= (noActiveSensors + 0.0f);
+        rightSensor /= (noActiveSensors + 0.0f);
 
 
         //Calculate target motor values

@@ -10,7 +10,7 @@ using System.Collections;
 using System.Linq;
 using System;
 
-public class LightDetectorScript : MonoBehaviour
+public class LightDetectorScript : DetectorScript
 {
 
     public float angle = 360;

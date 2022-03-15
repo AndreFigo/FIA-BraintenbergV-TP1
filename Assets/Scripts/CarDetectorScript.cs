@@ -7,7 +7,7 @@ using System.Collections;
 using System.Linq;
 using System;
 
-public class CarDetectorScript : MonoBehaviour
+public class CarDetectorScript : DetectorScript
 {
 
     public float angle = 360;

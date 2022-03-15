@@ -18,11 +18,15 @@ public class CarBehaviour : MonoBehaviour
     public WheelCollider RL;
     public bool DetectLights = true;
     public bool DetectCars = false;
+    public bool DetectBumperLights = false;
     public LightDetectorScript RightLD;
     public LightDetectorScript LeftLD;
     public CarDetectorScript LeftCD;
     public CarDetectorScript RightCD;
-    
+    public BumperLightDetectorScript RightBLD;
+    public BumperLightDetectorScript LeftBLD;
+
+
 
     private Rigidbody m_Rigidbody;
     public float m_LeftWheelSpeed;
