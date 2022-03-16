@@ -18,11 +18,7 @@ public class LightDetectorScript : DetectorScript
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
     
-    protected virtual float FuncOutput(float output)
-    {
-        // throw new NotImplementedException("Not implemented");
-        return output;
-    }
+    
     public float output;
     public int numObjects;
 
@@ -64,7 +60,7 @@ public class LightDetectorScript : DetectorScript
 
     }
     //public virtual float GetOutput() { throw new NotImplementedException("Not implemented"); }
-    public virtual float GetOutput() { 
+    public override float GetOutput() { 
         float minVal=0, maxVal=float.MaxValue;
         //y axis
         if(ApplyLimits) {

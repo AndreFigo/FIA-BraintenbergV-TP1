@@ -12,12 +12,9 @@ public class BumperLightDetectorScript : DetectorScript
     public bool ApplyThresholds, ApplyLimits;
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
+    private bool useClosest = true;
 
-    protected virtual float FuncOutput(float output)
-    {
-        // throw new NotImplementedException("Not implemented");
-        return output;
-    }
+    
     public float output;
     public int numObjects;
 
@@ -36,16 +33,17 @@ public class BumperLightDetectorScript : DetectorScript
     {
         GameObject[] bumperLights;
 
-        if (useAngle)
+        if (useClosest)
         {
-            bumperLights = GetVisibleBumperLights();
+            bumperLights = new GameObject[1];
+            bumperLights[0] = GetClosestBumperLight();
         }
         else
         {
             bumperLights = GetAllBumperLights();
         }
 
-        output = 0.1f;
+        output = 0.0f;
         numObjects = bumperLights.Length;
 
         foreach (GameObject bl in bumperLights)
@@ -59,7 +57,7 @@ public class BumperLightDetectorScript : DetectorScript
 
     }
     //public virtual float GetOutput() { throw new NotImplementedException("Not implemented"); }
-    public virtual float GetOutput()
+    public override float GetOutput()
     {
         float minVal = 0, maxVal = float.MaxValue;
         //y axis
@@ -88,6 +86,22 @@ public class BumperLightDetectorScript : DetectorScript
         return GameObject.FindGameObjectsWithTag("Pickable");
     }
 
+    GameObject GetClosestBumperLight()
+    {
+        GameObject closestLight = null;
+        //gets all objects with the tag "CarToFollow"
+        var bLights = GetAllBumperLights();
+
+        //calculates the distance between the current car and the other cars in order to find the closest
+        foreach (var b in bLights)
+        {
+            if (closestLight == null || (b.transform.position - transform.position).magnitude < (closestLight.transform.position - transform.position).magnitude)
+            {
+                closestLight= b;
+            }
+        }
+        return closestLight;
+    }   
     // Returns all "Light" tagged objects that are within the view angle of the Sensor. 
     // Only considers the angle over the y axis. Does not consider objects blocking the view.
     GameObject[] GetVisibleBumperLights()

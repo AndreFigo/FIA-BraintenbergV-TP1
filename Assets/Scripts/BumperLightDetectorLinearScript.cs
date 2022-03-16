@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BumperLightDetectorLinearScript : BumperLightDetectorScript
 {
-    protected override float FuncOutput(float output)
+    public override float FuncOutput(float output)
     {
         return output;
     }

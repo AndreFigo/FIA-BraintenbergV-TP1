@@ -15,9 +15,7 @@ public class CarDetectorScript : DetectorScript
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
 
-    protected virtual float FuncOutput(float output) {
-        throw new NotImplementedException("Not implemented");
-    }
+    
     public float output;
     public int numObjects;
 
@@ -70,7 +68,7 @@ public class CarDetectorScript : DetectorScript
         return closestCar;
     }
         
-    public float GetOutput() { 
+    public override float GetOutput() { 
         float minVal=0, maxVal=float.MaxValue;
         //y axis
         if(ApplyLimits) {

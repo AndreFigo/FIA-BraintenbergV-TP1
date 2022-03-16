@@ -12,7 +12,9 @@ using System.Collections;
 
 public class CarBehaviour2a : CarBehaviour
 {
-
+    
+    public float[] coefficients = {0.25f,0f,0.75f};
+    public float intensityFactor=3;
     void LateUpdate()
     {
         // YOUR CODE HERE
@@ -27,16 +29,20 @@ public class CarBehaviour2a : CarBehaviour
             if(areActive[i])
             {
                 noActiveSensors++;
-                leftSensor += sensorLeft[i].GetOutput();
-                rightSensor += sensorRight[i].GetOutput();
+                leftSensor += intensityFactor* coefficients[i]*sensorLeft[i].GetOutput();
+                rightSensor += intensityFactor*coefficients[i]*sensorRight[i].GetOutput();
             }
         }
-        leftSensor /= (noActiveSensors + 0.0f);
-        rightSensor /= (noActiveSensors + 0.0f);
-
-
         //Calculate target motor values
         m_LeftWheelSpeed = leftSensor * MaxSpeed;
         m_RightWheelSpeed = rightSensor * MaxSpeed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Pickable"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }
