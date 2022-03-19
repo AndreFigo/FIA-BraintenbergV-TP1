@@ -12,13 +12,8 @@ using System;
 
 public class LightDetectorLinearScript : LightDetectorScript
 {
-
     public override float FuncOutput(float output)
     {
-        return output;
+        return (invertOutput ? 1 - output : output);
     }
-
-
-
-
 }

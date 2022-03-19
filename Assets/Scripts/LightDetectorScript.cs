@@ -17,8 +17,9 @@ public class LightDetectorScript : DetectorScript
     public bool ApplyThresholds, ApplyLimits;
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
-    
-    
+    public bool closestLight = true;
+
+
     public float output;
     public int numObjects;
 
@@ -37,9 +38,10 @@ public class LightDetectorScript : DetectorScript
     {
         GameObject[] lights;
 
-        if (useAngle)
+        if (closestLight)
         {
-            lights = GetVisibleLights();
+            lights = new GameObject[1];
+            lights[0] = GetClosestLight();
         }
         else
         {
@@ -53,31 +55,34 @@ public class LightDetectorScript : DetectorScript
         {
             //print (1 / (transform.position - light.transform.position).sqrMagnitude);
             float r = light.GetComponent<Light>().range;
-            output +=   (1.0f / ((transform.position - light.transform.position).sqrMagnitude / r + 1));
+            output += (1.0f / ((transform.position - light.transform.position).sqrMagnitude / r + 1));
             //Debug.DrawLine (transform.position, light.transform.position, Color.red);
         }
-        output/=numObjects;
+        output /= numObjects;
 
     }
     //public virtual float GetOutput() { throw new NotImplementedException("Not implemented"); }
-    public override float GetOutput() { 
-        float minVal=0, maxVal=float.MaxValue;
+    public override float GetOutput()
+    {
+        float minVal = 0, maxVal = float.MaxValue;
         //y axis
-        if(ApplyLimits) {
+        if (ApplyLimits)
+        {
             minVal = MinY;
             maxVal = MaxY;
         }
         //X axis
-        if (ApplyThresholds && (output < MinX || output > MaxX)) {
+        if (ApplyThresholds && (output < MinX || output > MaxX))
+        {
             return 0f;
-        
+
         }
         float f_out = FuncOutput(output);
         // Console.WriteLine(f_out);
-        if(f_out < minVal && ApplyLimits) return minVal;
-        if(f_out > maxVal && ApplyLimits) return maxVal;
+        if (f_out < minVal && ApplyLimits) return minVal;
+        if (f_out > maxVal && ApplyLimits) return maxVal;
 
-        return f_out;            
+        return f_out;
     }
 
     // Returns all "Light" tagged objects. The sensor angle is not taken into account.
@@ -110,6 +115,23 @@ public class LightDetectorScript : DetectorScript
         }
 
         return (GameObject[])visibleLights.ToArray(typeof(GameObject));
+    }
+
+    GameObject GetClosestLight()
+    {
+        GameObject closestLight = null;
+        //gets all objects with the tag "CarToFollow"
+        var lights = GetAllLights();
+
+        //calculates the distance between the current car and the other cars in order to find the closest
+        foreach (var l in lights)
+        {
+            if (closestLight == null || (l.transform.position - transform.position).magnitude < (closestLight.transform.position - transform.position).magnitude)
+            {
+                closestLight = l;
+            }
+        }
+        return closestLight;
     }
 
 

@@ -36,6 +36,7 @@ public class CarBehaviour : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rigidbody.freezeRotation = true;
         m_axleLength = (RR.transform.position - RL.transform.position).magnitude;
     }
 

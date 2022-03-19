@@ -6,7 +6,7 @@ public class BumperLightDetectorLinearScript : BumperLightDetectorScript
 {
     public override float FuncOutput(float output)
     {
-        return output;
+        return invertOutput ? 1 - output : output;
     }
 
 }

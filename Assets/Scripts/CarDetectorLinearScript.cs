@@ -15,9 +15,9 @@ public class CarDetectorLinearScript : CarDetectorScript
 {
     public override float FuncOutput(float output)
     {
-        return output;
+        return (invertOutput ? 1 - output : output);
     }
 
-    
+
     // YOUR CODE HERE
 }

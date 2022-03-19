@@ -12,9 +12,9 @@ public class BumperLightDetectorScript : DetectorScript
     public bool ApplyThresholds, ApplyLimits;
     public float MinX, MaxX, MinY, MaxY;
     private bool useAngle = true;
-    private bool useClosest = true;
+    public bool useClosest = true;
 
-    
+
     public float output;
     public int numObjects;
 
@@ -50,10 +50,11 @@ public class BumperLightDetectorScript : DetectorScript
         {
             //print (1 / (transform.position - light.transform.position).sqrMagnitude);
             float r = bl.GetComponent<Light>().range;
-            output += (1.0f / ((transform.position - bl.transform.position).sqrMagnitude/(2*r)  + 1));
+            output += (1.0f / ((transform.position - bl.transform.position).sqrMagnitude / (4 * r) + 1));
             //Debug.DrawLine (transform.position, light.transform.position, Color.red);
         }
-        output /= numObjects;
+        if (numObjects > 0)
+            output /= numObjects;
 
     }
     //public virtual float GetOutput() { throw new NotImplementedException("Not implemented"); }
@@ -97,11 +98,11 @@ public class BumperLightDetectorScript : DetectorScript
         {
             if (closestLight == null || (b.transform.position - transform.position).magnitude < (closestLight.transform.position - transform.position).magnitude)
             {
-                closestLight= b;
+                closestLight = b;
             }
         }
         return closestLight;
-    }   
+    }
     // Returns all "Light" tagged objects that are within the view angle of the Sensor. 
     // Only considers the angle over the y axis. Does not consider objects blocking the view.
     GameObject[] GetVisibleBumperLights()

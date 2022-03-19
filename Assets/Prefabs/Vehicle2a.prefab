@@ -321,12 +321,20 @@ MonoBehaviour:
   RL: {fileID: 14675050}
   DetectLights: 1
   DetectCars: 0
+  DetectBumperLights: 0
   RightLD: {fileID: 1010094822325634599}
   LeftLD: {fileID: 6101812135912574356}
   LeftCD: {fileID: 0}
   RightCD: {fileID: 0}
+  RightBLD: {fileID: 0}
+  LeftBLD: {fileID: 0}
   m_LeftWheelSpeed: 0
   m_RightWheelSpeed: 0
+  coefficients:
+  - 0.25
+  - 0.1
+  - 0.5
+  intensityFactor: 3
 --- !u!1 &119292
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a26d17b5f7ae43a1b646ca2e1700458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -598,6 +607,7 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  closestLight: 1
   output: 0
   numObjects: 0
   stdDev: 1
@@ -837,6 +847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a26d17b5f7ae43a1b646ca2e1700458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -844,6 +855,7 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  closestLight: 1
   output: 0
   numObjects: 0
   stdDev: 1
@@ -1146,6 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efed835423f744d7998d650150fa6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -1153,8 +1166,13 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  useAngle: 1
+  interactAll: 0
+  closestCar: 0
+  chaser: 0
   output: 0
   numObjects: 0
+  has_own: 0
 --- !u!1 &960635259960354729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,6 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4efed835423f744d7998d650150fa6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -1239,8 +1258,13 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  useAngle: 1
+  interactAll: 0
+  closestCar: 0
+  chaser: 0
   output: 0
   numObjects: 0
+  has_own: 0
 --- !u!1 &4469401387021470119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,6 +1308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14195841ff04e4943bc3e3bc4d9da2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -1291,8 +1316,13 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  useAngle: 1
+  interactAll: 0
+  closestCar: 0
+  chaser: 0
   output: 0
   numObjects: 0
+  has_own: 0
   stdDev: 1
   mean: 0
 --- !u!1 &5498860399777857639
@@ -1372,6 +1402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14195841ff04e4943bc3e3bc4d9da2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -1379,8 +1410,13 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  useAngle: 1
+  interactAll: 0
+  closestCar: 0
+  chaser: 0
   output: 0
   numObjects: 0
+  has_own: 0
   stdDev: 1
   mean: 0
 --- !u!1 &8063570606774929682
@@ -1426,6 +1462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a600c741beed54732aa00e64782cbd1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -1433,6 +1470,7 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  closestLight: 1
   output: 0
   numObjects: 0
 --- !u!1 &8832093296595671740
@@ -1478,6 +1516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a600c741beed54732aa00e64782cbd1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertOutput: 0
   angle: 360
   ApplyThresholds: 0
   ApplyLimits: 0
@@ -1485,5 +1524,6 @@ MonoBehaviour:
   MaxX: 0
   MinY: 0
   MaxY: 0
+  closestLight: 1
   output: 0
   numObjects: 0
